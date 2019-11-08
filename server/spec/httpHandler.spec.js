@@ -23,6 +23,21 @@ describe('server responses', () => {
 
   it('should respond to a GET request for a swim command', (done) => {
     // write your test here
+
+
+    let {req, res} = server.mock('/', 'GET', 'left')
+    //ask for some data here to, then see what the respond sends back
+    //do an expect on the return value of the respone from httpHandler
+
+    //create a function in http handler to handle GET request
+    //inside that function, it needs to call the keypress handler to obtain the value from the key press and then pass into data
+    //how to run console in node??
+    httpHandler.router(req, res);
+    // expect(res._data).to.equal('left');
+    expect(res._responseCode).to.equal(200);
+    expect(res._data).to.equal('test.');
+
+
     done();
   });
 
