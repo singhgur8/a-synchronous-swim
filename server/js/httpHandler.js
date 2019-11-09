@@ -10,6 +10,7 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 let messageQueue = null;
 module.exports.initialize = (queue) => {
   messageQueue = queue;
+  //console.log(messageQueue); //{enqueue: [Function], dequeue: [Function]}
 };
 
 module.exports.router = (req, res, next = ()=>{}) => {
@@ -17,7 +18,8 @@ module.exports.router = (req, res, next = ()=>{}) => {
   res.writeHead(200, headers);
 
   //res.write() //Anything with %%% means I added it, pass in the info from key press handler
-  res.write('test');
+  res.write(messageQueue.dequeue().toString());
+  // console.log(messageQueu);
 
 
   res.end();

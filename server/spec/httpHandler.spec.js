@@ -6,13 +6,16 @@ const server = require('./mockServer');
 
 const httpHandler = require('../js/httpHandler');
 
+const messageQueue = require('../js/messageQueue'); // added
+
 
 
 describe('server responses', () => {
 
-  it('should respond to a OPTIONS request', (done) => {
+  xit('should respond to a OPTIONS request', (done) => {
     let {req, res} = server.mock('/', 'OPTIONS');
 
+    httpHandler.initialize()
     httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
@@ -25,18 +28,17 @@ describe('server responses', () => {
     // write your test here
 
 
-    let {req, res} = server.mock('/', 'GET', 'left')
+    let {req, res} = server.mock('/', 'GET', 'left');
     //ask for some data here to, then see what the respond sends back
     //do an expect on the return value of the respone from httpHandler
 
     //create a function in http handler to handle GET request
     //inside that function, it needs to call the keypress handler to obtain the value from the key press and then pass into data
     //how to run console in node??
+    httpHandler.initialize(messageQueue); //added
     httpHandler.router(req, res);
-    // expect(res._data).to.equal('left');
     expect(res._responseCode).to.equal(200);
-    expect(res._data).to.equal('test.');
-
+    expect(res._data.toString()).to.equal('3');
 
     done();
   });
