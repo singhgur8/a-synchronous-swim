@@ -1,8 +1,11 @@
-const messages = [3]; // the storage unit for messages
+const messages = []; // the storage unit for messages
+//server requsets seem to be skipping every other deque...
+
 
 module.exports.enqueue = (message) => {
   console.log(`Enqueing message: ${message}`);
   messages.push(message);
+  console.log(messages);
 };
 
 module.exports.dequeue = () => {

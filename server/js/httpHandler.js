@@ -18,10 +18,20 @@ module.exports.router = (req, res, next = ()=>{}) => {
   res.writeHead(200, headers);
 
   //res.write() //Anything with %%% means I added it, pass in the info from key press handler
-  res.write(messageQueue.dequeue().toString());
+  //res.write(messageQueue.dequeue().toString());
   // console.log(messageQueu);
+  var data;
+  //if the req.method is POST then enque to the storage
+  if (req.method === 'POST') {
+    messageQueue.enqueue(req._postData);
+    console.log('hi');
+  }
+  if (req.method === 'GET') {
 
+    data = messageQueue.dequeue() || '';
+    data = data.toString();
+  }
 
-  res.end();
+  res.end(data);
   next(); // invoke next() at the end of a request to help with testing!
 };

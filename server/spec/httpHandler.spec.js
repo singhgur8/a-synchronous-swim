@@ -15,7 +15,7 @@ describe('server responses', () => {
   xit('should respond to a OPTIONS request', (done) => {
     let {req, res} = server.mock('/', 'OPTIONS');
 
-    httpHandler.initialize()
+    httpHandler.initialize();
     httpHandler.router(req, res);
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);

@@ -4,7 +4,30 @@
 
   //
   // TODO: build the swim command fetcher here
-  //
+  //build get ajax
+  setInterval(() => {
+    $.ajax({
+      type: 'GET',
+      url: serverUrl,
+      data: {},
+      // cache: false,
+      contentType: false,
+      // processData: false,
+      success: (data) => {
+        // get some information from server
+        console.log('GET success.');
+        console.log(data);
+        SwimTeam.move(data);
+        // reload the page
+        //window.location = window.location.href;
+      },
+      error: () => {
+        console.error = ('Could not finish GET on client side.');
+      }
+    });
+  }, 5000);
+
+
 
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
@@ -45,5 +68,6 @@
 
     ajaxFileUplaod(file);
   });
+
 
 })();
