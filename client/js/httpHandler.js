@@ -15,8 +15,8 @@
       // processData: false,
       success: (data) => {
         // get some information from server
-        console.log('GET success.');
-        console.log(data);
+        //console.log('GET success.');
+        // console.log(data);
         SwimTeam.move(data);
         // reload the page
         //window.location = window.location.href;
@@ -25,7 +25,14 @@
         console.error = ('Could not finish GET on client side.');
       }
     });
-  }, 5000);
+  }, 300);
+
+  //HAVE another GET request onLoad that will get the current image stored on server
+  // and load it to the background
+
+  // callback function: a GET request that requests images
+
+  // on page load: call callback function for GET image
 
 
 
@@ -46,6 +53,8 @@
       processData: false,
       success: () => {
         // reload the page
+        //after Posting, we need to GET the newly posted img to the background so
+        //run the GEt request for img callback
         window.location = window.location.href;
       }
     });

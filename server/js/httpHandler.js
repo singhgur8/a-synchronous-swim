@@ -23,15 +23,34 @@ module.exports.router = (req, res, next = ()=>{}) => {
   var data;
   //if the req.method is POST then enque to the storage
   if (req.method === 'POST') {
-    messageQueue.enqueue(req._postData);
-    console.log('hi');
+    //messageQueue.enqueue(req._postData);
   }
   if (req.method === 'GET') {
 
-    data = messageQueue.dequeue() || '';
-    data = data.toString();
+    //if(req.contentType)
+    console.log('req: ' + req.url);
+
+    if( req.url !==undefined ) { //probably an img url for now
+      //get the img from storage ?? what is the storage
+      //if the storage cant find the url
+        //write head 404
+        res.writeHead(404, headers);
+        let pathName = path.join('.', res.url);
+        console.log('path: ' + pathName);
+        //data = IMG url?
+        if( fs.exists(pathName) ){
+          res.writeHead(200, headers);
+          console.log();
+        }
+      //reds.end the URL? of the img
+    } else { //probably a swim request for now
+      data = messageQueue.dequeue() || '';
+      data = data.toString();
+    }
+
   }
 
   res.end(data);
+
   next(); // invoke next() at the end of a request to help with testing!
 };
