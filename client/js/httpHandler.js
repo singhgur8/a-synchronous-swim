@@ -22,13 +22,34 @@
         //window.location = window.location.href;
       },
       error: () => {
-        console.error = ('Could not finish GET on client side.');
+        console.error = ('Could not finish GET for swim command.');
       }
     });
-  }, 300);
+  }, 200);
 
   //HAVE another GET request onLoad that will get the current image stored on server
   // and load it to the background
+
+  setInterval(() => {
+    $.ajax({
+      type: 'GET',
+      // url: serverUrl,
+      url: 'http://127.0.0.1:3000/background.jpg',
+      data: {},
+      // cache: false,
+      contentType: 'image',
+      // processData: false,
+      success: (data) => {
+        // get some information from server
+        console.log(data);
+        // reload the page
+        window.location = window.location.href;
+      },
+      error: () => {
+        console.error = ('Could not finish GET for image.');
+      }
+    });
+  }, 5000);
 
   // callback function: a GET request that requests images
 
